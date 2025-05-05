@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { backendUrl } from "@/app/page"
 
 export default function UpdateBook({ onAction, book }) {
   const [newTitle, setNewTitle] = useState("")
@@ -41,7 +42,7 @@ export default function UpdateBook({ onAction, book }) {
       try {
         console.log("book ID ya hii kitabu", book.id)
         
-        const response = await fetch(`/books/${book.id}`, {
+        const response = await fetch(`${backendUrl}/books/${book.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -53,7 +54,7 @@ export default function UpdateBook({ onAction, book }) {
         setUpdateMessage(data.message || "Book updated successfully!")
         setShowForm(false)
       } catch (error) {
-        setUpdateMessage("Failed to update book.", error)
+        setUpdateMessage("Failed to update book.")
         setShowForm(false)
       }
     }

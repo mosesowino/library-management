@@ -64,7 +64,7 @@ import {
 } from "@/components/ui/tooltip"
 import { useEffect, useState } from "react"
 import axios from "axios"
-// export const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+export const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 
 export default function Dashboard() {
@@ -73,7 +73,9 @@ export default function Dashboard() {
   const[books, setBooks] = useState<Book[]>([])
   const[totalCopies, setTotalCopies] = useState<number>()
   const[issuedCopies, setIssuedCopies] = useState<number>()
+  const[transactionFilter, setTransactionFilter] = useState('all')
   const [transactions, setTransactions] = useState<T_actions[] | null>(null);
+  const transactionFilterOptions = ['all', 'return', 'borrow', 'payment'];
   
   const filteredBooks = books.filter((book) => {
     const query = searchQuery.toLowerCase();
@@ -109,9 +111,29 @@ export default function Dashboard() {
   
   
 
+  const filterTransactionsHandler = (filterOption: string) =>{
+    setTransactionFilter(filterOption)
+    if(transactionFilter === 'all'){
+      setTransactions(transactionsList);
+    } else {
+      const filteredTransactions: { 
+        name: string; 
+        email: string; 
+        type: string; 
+        status: string; 
+        date: string; 
+        amount: string; 
+      }[]= transactionsList.filter((t)=>
+        (t.type === filterOption)
+      )
+      setTransactions(filteredTransactions);
+    }
+  }
+  
+
   useEffect(()=>{
     const fetch_all_books = async() =>{
-      const result = await axios.get('/books')
+      const result = await axios.get(backendUrl + '/books')
       if(result && result.data){
         console.log("result ==>", result)
         setBooks(result.data)
@@ -122,7 +144,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetch_all_transactions = async() =>{
-      const result = await axios.get('/transactions')
+      const result = await axios.get(backendUrl + '/transactions')
       if(result && result.data){
         console.log("result ==>", result)
         setTransactions(result.data)
@@ -352,7 +374,7 @@ export default function Dashboard() {
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
         <div>
               <Image
-                  src="/public/images/libraryImage.png"
+                  src="/images/libraryImage.png"
                   width={72}
                   height={72}
                   layout="responsive"
@@ -449,6 +471,8 @@ export default function Dashboard() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
+                        {/* {let transactionArray = [];
+                        transactionFilter.length > 0 ? transactions.map((transaction)=> (transaction.type === transactionFilter ? transactionArray.push(transaction):'')): console.log("no filtering")} */}
                         {transactions &&(
                           transactions.map((transaction)=>(
                             <TableRow className="bg-accent" key={transaction.id}>
@@ -466,12 +490,12 @@ export default function Dashboard() {
                               </TableCell>
                               <TableCell className="hidden sm:table-cell">
                                 <Badge className="text-xs" variant="secondary">
-                                  {(transaction.issue_date).split("T")[0].replace(/-/g, ":")}
+                                  {transaction.issue_date}
                                 </Badge>
                               </TableCell>
                               <TableCell className="hidden md:table-cell">
                                 <Badge className="text-xs" variant="secondary">
-                                  {transaction.return_date? (transaction.return_date).split("T")[0].replace(/-/g, ":"):'Not returned'}
+                                  {transaction.return_date? transaction.return_date:'Not returned'}
                                 </Badge>
                               </TableCell>
                               <TableCell className="text-right">{transaction.fee}</TableCell>

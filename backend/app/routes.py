@@ -1,47 +1,33 @@
-from flask import Blueprint, jsonify, render_template, request, redirect, url_for, send_from_directory, current_app
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for
 from .models import Book, Member, Transaction
 from . import db
 from datetime import datetime
 from sqlalchemy.orm import joinedload
 from sqlalchemy import insert, update
-import os
 
 now = datetime.now()
+# now = now.strftime('%Y-%m-%d %H:%M:%S')
 now = now.strftime('%Y-%m-%d')
 
 
 
 routes = Blueprint("routes", __name__)
 
-@routes.route('/')
-def index():
-    return send_from_directory(os.path.join(current_app.static_folder, 'frontend'), 'index.html')
-
-@routes.route('/images/<path:filename>')
-def serve_images(filename):
-    return send_from_directory(os.path.join(current_app.static_folder, 'frontend', 'images'), filename)
-
-@routes.route('/<path:path>')
-def catch_all(path):
-    full_path = os.path.join(current_app.static_folder, 'frontend', path)
-
-    if os.path.exists(full_path):
-        return send_from_directory(os.path.join(current_app.static_folder, 'frontend'), path)
-    else:
-        return send_from_directory(os.path.join(current_app.static_folder, 'frontend'), 'index.html')
-
-
+@routes.route("/")
+def serve_index():
+    return jsonify({"message": "Welcome to the Library Management System API!"})
 
 @routes.route("/books", methods=["GET", "POST"])
 def manage_books():
     if request.method == "POST":
-        data = request.get_json() 
+        data = request.get_json()  # Getting data from JSON body
         title = data.get("title")
         author = data.get("author")
         copies = int(data.get("copies"))
         fee = int(data.get("fee"))
         issued = int(data.get("issued"))
         new_book = Book(title=title, author=author, total_copies=copies, cost_per_day=fee, issued_copies=issued)
+        print(new_book)
         db.session.add(new_book)
         db.session.commit()
         
@@ -211,6 +197,7 @@ def edit_member(member_id):
 def debt_update(member_id):
     data = request.get_json()
     new_debt = data["newDebt"]
+    print("bababab:  ", new_debt)
 
     db.session.execute(
         update(Member)
@@ -229,6 +216,7 @@ def debt_update(member_id):
 @routes.route("/members/delete/<int:member_id>", methods=["DELETE"])
 def delete_member(member_id):
     member = db.session.query(Member).filter_by(id=member_id)
+    print(member)
     member.delete()
     db.session.commit()
     
@@ -267,6 +255,12 @@ def manage_transactions():
                 .values(issued_copies=Book.issued_copies + 1)
             )
 
+            # db.session.execute(
+            #     update(Member)
+            #     .where(Member.id == member_id)
+            #     .values(debt=Member.debt + book_fee)
+            # )
+
             db.session.commit()
 
             return jsonify({
@@ -282,8 +276,10 @@ def manage_transactions():
     
     if request.method == "GET":
         transactions = Transaction.query.all()
+        # issue_date = transaction.issue_date.isoformat()
+        # return_date = transaction.return_date.isoformat() if transaction.return_date else None,
 
-
+        print(transactions)
         transactions_data = [
             {
                 "id": transaction.id,
@@ -310,6 +306,7 @@ def return_book():
     book_id = data.get("book_id")
     member_id = data.get("member_id")
     payment = int(data.get("payment"))
+    print(book_id, member_id, payment)
 
     if not book_id or not member_id:
         return jsonify({"error": "book_id and member_id are required"}), 400
@@ -353,6 +350,10 @@ def return_book():
         "transaction_id": transaction.id
     }), 200
 
+# except Exception as e:
+#     db.session.rollback()
+#     return jsonify({"error": "Failed to return book", "details": str(e)}), 500
+
 
 
 @routes.route("/issued_books", methods=["GET"])
@@ -384,6 +385,7 @@ def make_payment():
     data = request.get_json()
     member_id = int(data.get("member_id"))
     amount = int(data.get("amount"))
+    print(member_id, amount)
 
     if not member_id or not amount:
         return jsonify({"error": "member_id and amount are required"}), 400
