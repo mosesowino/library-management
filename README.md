@@ -178,12 +178,6 @@ Then start the backend server to serve the app.
 
 ## Screenshots
 
-You can add screenshots of the frontend UI here to showcase the application. To add screenshots:
-
-1. Capture screenshots of key pages (e.g., Dashboard, Issue Book, Members).
-2. Save images in the `frontend/public/images` folder.
-3. Add markdown image links here, for example:
-
 ![Library Homepage](frontend/public/images/homepage.png)
 *Library Management System Homepage*
 
@@ -212,7 +206,7 @@ You can add screenshots of the frontend UI here to showcase the application. To 
 *Return a borrowed book*
 
 ![Library Image](frontend/public/images/libraryImage.png)
-*Library logo or image*
+*Library image*
 
 ---
 
