@@ -14,8 +14,9 @@ migrate = Migrate()
 def create_app():
     load_dotenv()
     app = Flask(__name__)
-    frontend_url = os.getenv("FRONTEND_URL")
-    CORS(app, origins=[frontend_url])
+    # frontend_url = os.getenv("FRONTEND_URL")
+    frontend_url="https://library-management-lqdj.vercel.app"
+    CORS(app, origins=frontend_url)
 
     app.config.from_object(Config)
 
