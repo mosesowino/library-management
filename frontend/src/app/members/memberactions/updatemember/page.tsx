@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { backendUrl } from "@/app/page"
+// import { backendUrl } from "@/app/page"
 
 export default function UpdateMember({ onAction, member }) {
   const [newName, setNewName] = useState("")
@@ -40,7 +40,7 @@ export default function UpdateMember({ onAction, member }) {
 
       const sendUpdate = async () => {
         try {
-          const response = await fetch(`${backendUrl}/members/${member?.id}`, {
+          const response = await fetch(`/members/${member?.id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",

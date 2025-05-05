@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
 
-import { backendUrl } from "@/app/page"
+// import { backendUrl } from "@/app/page"
 
 export default function ReturnBook({onAction, selectedBook}) {
   const [payment, setPayment] = useState()
@@ -27,7 +27,7 @@ export default function ReturnBook({onAction, selectedBook}) {
     //update members debt at members endpoint using put method and selectedBook.member_id  
     const sendUpdate = async () => {
       try {
-        const response = await fetch(`${backendUrl}/members/debtUpdate/${selectedBook.member_id}`, {
+        const response = await fetch(`/members/debtUpdate/${selectedBook.member_id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export default function ReturnBook({onAction, selectedBook}) {
       }
   
       try {
-        const response = await fetch(`${backendUrl}/return`, {
+        const response = await fetch(`/return`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

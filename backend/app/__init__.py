@@ -1,32 +1,23 @@
-from flask import Flask
+from flask import Flask, send_from_directory, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from app.config import Config
-from flask_cors import CORS
 import os
 from dotenv import load_dotenv
-
 
 db = SQLAlchemy()
 migrate = Migrate()
 
 def create_app():
     load_dotenv()
-    app = Flask(__name__)
-    # frontend_url = os.getenv("FRONTEND_URL")
-    frontend_url="https://library-management-lqdj.vercel.app"
-    CORS(app, origins=frontend_url)
-
+    app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.dirname(__file__)), "static"))
     app.config.from_object(Config)
 
-    # Initialize extensions
     db.init_app(app)
     migrate.init_app(app, db)
 
-    # Import and register routes
     with app.app_context():
         from app import routes, models
         app.register_blueprint(routes.routes)
-
 
     return app

@@ -1,23 +1,127 @@
-# Flask Template
+# Library Manager Backend
 
-This sample repo contains the recommended structure for a Python Flask project. In this sample, we use `flask` to build a web application and the `pytest` to run tests.
+## Project Description
+This is the backend service for the Library Manager application. It is built using Flask, providing RESTful API endpoints to manage books, members, and transactions such as issuing and returning books. The backend also serves the frontend static files.
 
- For a more in-depth tutorial, see our [Flask tutorial](https://code.visualstudio.com/docs/python/tutorial-flask).
+## Features Overview
+- Manage books: add, update, delete, and list books.
+- Manage members: add, update, delete, and list members.
+- Manage transactions: issue books, return books, and track payments.
+- Serve frontend static files including HTML, CSS, and JavaScript.
+- Database migrations support using Flask-Migrate.
+- Environment-based configuration for flexibility.
 
- The code in this repo aims to follow Python style guidelines as outlined in [PEP 8](https://peps.python.org/pep-0008/).
+## Technologies Used
+- Python 3
+- Flask
+- Flask-SQLAlchemy
+- Flask-Migrate
+- MySQL (via SQLAlchemy)
+- python-dotenv for environment variable management
 
-## Running the Sample
+## Setup Instructions
 
-To successfully run this example, we recommend the following VS Code extensions:
+### Installing Dependencies
+Install the required Python packages using pip:
 
-- [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-- [Python Debugger](https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy)
-- [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) 
+```bash
+pip install -r requirements.txt
+```
 
-- Open the template folder in VS Code (**File** > **Open Folder...**)
-- Create a Python virtual environment using the **Python: Create Environment** command found in the Command Palette (**View > Command Palette**). Ensure you install dependencies found in the `pyproject.toml` file
-- Ensure your newly created environment is selected using the **Python: Select Interpreter** command found in the Command Palette
-- Run the app using the Run and Debug view or by pressing `F5`
-- To test your app, ensure you have the dependencies from `dev-requirements.txt` installed in your environment
-- Navigate to the Test Panel to configure your Python test or by triggering the **Python: Configure Tests** command from the Command Palette
-- Run tests in the Test Panel or by clicking the Play Button next to the individual tests in the `test_app.py` file
+For development dependencies, use:
+
+```bash
+pip install -r dev-requirements.txt
+```
+
+### Environment Variables Configuration
+Create a `.env` file in the backend directory to configure environment variables. At minimum, set:
+
+```
+SECRET_KEY=your_secret_key
+FLASK_DEBUG=1
+SQLALCHEMY_DATABASE_URI=mysql+pymysql://username:password@host:port/database
+```
+
+The app also has a default database URI configured in `app/config.py` which can be overridden by environment variables.
+
+### Database Setup and Migrations
+The backend uses MySQL as the database. Ensure you have a MySQL server running and accessible.
+
+Initialize and apply database migrations using Flask-Migrate:
+
+```bash
+flask db init
+flask db migrate -m "Initial migration"
+flask db upgrade
+```
+
+Note: The Flask CLI commands require the `FLASK_APP` environment variable to be set, e.g.:
+
+```bash
+export FLASK_APP=run.py
+```
+
+On Windows CMD:
+
+```cmd
+set FLASK_APP=run.py
+```
+
+## Running the Application
+Run the backend server using:
+
+```bash
+python run.py
+```
+
+The server will start on port 5000 by default.
+
+## API Endpoints Summary
+
+### Books
+- `GET /books` - List all books
+- `POST /books` - Add a new book
+- `GET /books/<book_id>` - Get details of a book
+- `PUT /books/<book_id>` - Update a book
+- `DELETE /books/delete/<book_id>` - Delete a book
+
+### Members
+- `GET /members` - List all members
+- `POST /members` - Add a new member
+- `GET /members/<member_id>` - Get details of a member
+- `PUT /members/<member_id>` - Update a member
+- `PUT /members/debtUpdate/<member_id>` - Update member debt
+- `DELETE /members/delete/<member_id>` - Delete a member
+
+### Transactions
+- `GET /transactions` - List all transactions
+- `POST /transactions` - Issue a book to a member
+- `POST /return` - Return a book
+- `GET /issued_books` - List currently issued books
+- `POST /make_payment` - Make a payment towards member debt
+
+## Folder Structure Overview
+```
+backend/
+├── app/                    # Flask application package
+│   ├── __init__.py         # App factory and initialization
+│   ├── config.py           # Configuration settings
+│   ├── models.py           # Database models (Books, Members, Transactions)
+│   └── routes.py           # API route definitions
+├── migrations/             # Database migration files
+├── static/                 # Static files served by Flask (includes frontend)
+├── dev-requirements.txt    # Development dependencies
+├── requirements.txt        # Production dependencies
+├── run.py                  # Application entry point
+├── .env                    # Environment variables (not committed)
+└── README.md               # This file
+```
+
+## Additional Notes
+- Ensure your MySQL database credentials and connection details are correctly set in environment variables or `app/config.py`.
+- The backend serves a frontend SPA located in the `static/frontend` directory.
+- Use Postman or similar tools to test API endpoints during development.
+
+## Contact
+For questions or support, please contact the project maintainer.

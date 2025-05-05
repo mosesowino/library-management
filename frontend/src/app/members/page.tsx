@@ -70,7 +70,7 @@ import AddMember from "./memberactions/addmember/page"
 import UpdateMember from "./memberactions/updatemember/page"
 import MakePayment from "../transactions/makepayment/page"
 import AlertCard from "@/utilities/alertcard"
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+// const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 
 
@@ -92,7 +92,7 @@ export default function Members() {
 
     useEffect(()=>{
       const fetched_members = async() =>{
-        const results = await axios.get(backendUrl + '/members')
+        const results = await axios.get('/members')
         console.log(results.data)
         if(results && results.data){
           localStorage.setItem('members',JSON.stringify(results.data))
@@ -164,7 +164,7 @@ export default function Members() {
       if (!currentMember?.id) return;
     
       try {
-        const res = await fetch(`${backendUrl}/members/delete/${currentMember.id}`, {
+        const res = await fetch(`/members/delete/${currentMember.id}`, {
           method: 'DELETE',
         });
     

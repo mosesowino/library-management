@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
-import { backendUrl } from "@/app/page";
+// import { backendUrl } from "@/app/page";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAppContext } from "@/app/context/AppContext";
@@ -35,7 +35,7 @@ export default function IssueBook() {
 
   const fetchAllBooks = async () => {
     try {
-      const result = await axios.get(`${backendUrl}/books`);
+      const result = await axios.get(`/books`);
       if (result && result.data) {
         setBooks(result.data);
       }
@@ -62,7 +62,7 @@ export default function IssueBook() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${backendUrl}/transactions`, {
+      const response = await fetch(`/transactions`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

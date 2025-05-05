@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { backendUrl } from "@/app/page"
+// import { backendUrl } from "@/app/page"
 
 export default function AddBook({ onAction }) {
   const [addBookMessage, setAddBookMessage] = useState("")
@@ -36,7 +36,7 @@ export default function AddBook({ onAction }) {
       }
 
       try {
-        const response = await fetch(`${backendUrl}/books`, {
+        const response = await fetch('/books', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

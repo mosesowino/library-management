@@ -64,7 +64,6 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip"
 
-import { backendUrl } from "../../page"
 import { useEffect, useState } from "react"
 import ReturnBook from "@/app/transactions/returnbook/page"
 
@@ -75,7 +74,7 @@ export default function Issued() {
   
   useEffect(() => {
     const fetchIssuedBooks = async () => {
-      const response = await fetch(`${backendUrl}/issued_books`)
+      const response = await fetch(`/issued_books`)
       if (!response.ok) {
         throw new Error("Failed to fetch issued books")
       }

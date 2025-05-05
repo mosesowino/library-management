@@ -21,8 +21,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const fetchMembers = async () => {
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL
-      const results = await axios.get(backendUrl + '/members')
+      // const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL
+      const results = await axios.get('/members')
       if (results?.data) {
         localStorage.setItem("members", JSON.stringify(results.data))
         setMemberData(results.data)

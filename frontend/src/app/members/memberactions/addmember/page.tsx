@@ -39,7 +39,7 @@ export default function AddMember({ onAction }) {
 
       const sendToBackend = async () => {
         try {
-          const response = await fetch(`${backendUrl}/members`, {
+          const response = await fetch(`/members`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

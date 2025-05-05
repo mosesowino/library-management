@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
 
-import { backendUrl } from "@/app/page"
+// import { backendUrl } from "@/app/page"
 import { ServerResponse } from "http"
 
 export default function MakePayment({onAction, member}) {
@@ -39,7 +39,7 @@ export default function MakePayment({onAction, member}) {
 
       // Call the API to make payment if done is clicked
       async function makePayment() {
-      const response = await fetch(`${backendUrl}/make_payment`, {
+      const response = await fetch(`/make_payment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

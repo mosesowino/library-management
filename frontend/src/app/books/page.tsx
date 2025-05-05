@@ -1,12 +1,9 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import {
-  File,
   Home,
   LineChart,
-  ListFilter,
   MoreHorizontal,
   BookOpenText,
   PanelLeft,
@@ -15,7 +12,6 @@ import {
   Settings,
   Handshake,
   Users2,
-  LucideInfo,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -38,7 +34,6 @@ import {
 } from "@/components/ui/card"
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -70,7 +65,7 @@ import AddBook from "./bookactions/addbook/page"
 import UpdateBook from "./bookactions/updatebook/page"
 import axios from "axios"
 import AlertCard from "@/utilities/alertcard"
-import { backendUrl } from "../page"
+// import { backendUrl } from "../page"
 
 export default function Books() {
   const [books, setBooks] = useState<Book[]>([])
@@ -92,7 +87,7 @@ export default function Books() {
   // Function to fetch all books
   const fetchAllBooks = async () => {
     try {
-      const result = await axios.get(`${backendUrl}/books`)
+      const result = await axios.get(`/books`)
       if (result && result.data) {
         setBooks(result.data)
       }
@@ -154,10 +149,10 @@ export default function Books() {
 
   const deleteBook = async () => {
     if (!currentBook?.id) return
-    console.log("The id of this book bana, ", currentBook.id)
+    console.log("The id of this book bana, ", currentBook?.id)
 
     try {
-      const res = await fetch(`${backendUrl}/books/delete/${currentBook.id}`, {
+      const res = await fetch(`/books/delete/${currentBook?.id}`, {
         method: 'DELETE',
       })
 
