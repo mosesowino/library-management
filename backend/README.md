@@ -118,4 +118,4 @@ pytest
 Specify your license here (e.g., MIT License).
 
 ## Contact
-For support or inquiries, please contact [Your Name] at [your.email@example.com].
+For support or inquiries, please contact 0714275196 at mosesowino1610@gmail.com
