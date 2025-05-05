@@ -71,8 +71,8 @@ export default function MakePayment({onAction, member}) {
               {message}
             </Card>):
               <CardContent className="text-center">
-                  <p>Member name: {member.name}</p>
-                  <p>Fee: {member.debt}</p>
+                  <p>Member name: {member?.name}</p>
+                  <p>Fee: {member?.debt}</p>
               </CardContent>
             }
           </Card>
