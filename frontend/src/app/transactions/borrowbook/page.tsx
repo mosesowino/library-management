@@ -15,6 +15,7 @@ import { backendUrl } from "@/app/page";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAppContext } from "@/app/context/AppContext";
+import TransactionToast from "@/utilities/toast";
 
 export default function IssueBook() {
   const { memberData } = useAppContext();
@@ -22,6 +23,7 @@ export default function IssueBook() {
   const [bookTitle_Author, setbookTitle_Author] = useState("");
   const [memberId, setMemberId] = useState("");
   const [suggestions, setSuggestions] = useState<Book[]>([]);
+  const [showToast, setShowToast] = useState("");
 
   interface Book {
     author: string;
@@ -73,9 +75,12 @@ export default function IssueBook() {
       if (response.ok) {
         console.log("Transaction successful!");
         setbookTitle_Author("");
-        setMemberId("");
-        await fetchAllBooks(); // ✅ refetch book availability
-        // You could also trigger memberData update here if debt might change.
+        setMemberId(""); 
+        setShowToast("true")
+        setTimeout(() => {
+          setShowToast("");
+        }, 5000);
+        await fetchAllBooks(); 
       } else {
         console.error("Failed to submit transaction");
       }
@@ -197,6 +202,7 @@ export default function IssueBook() {
                 </form>
               </CardContent>
             </Card>
+            <TransactionToast showToast={showToast}/>
           </div>
         </div>
       </main>

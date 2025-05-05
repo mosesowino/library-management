@@ -343,8 +343,8 @@ export default function Dashboard() {
                           setShowSuggestions(false);
                         }}
                       >
-                        <div className="font-semibold">{book.title}</div>
-                        <div className="text-sm text-gray-500">{book.author}</div>
+                        <div className="font-semibold text-white">{book.title}</div>
+                        <div className="text-sm text-gray-50">{book.author}</div>
                       </div>
                     ))
                   ) : (

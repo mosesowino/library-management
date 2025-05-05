@@ -340,7 +340,7 @@ export default function Issued() {
                             {issued.fee}
                           </TableCell>
                           <TableCell className="hidden md:table-cell">
-                            {issued.issue_date}
+                            {(issued.issue_date).split("T")[0].replace("-", ":")}
                           </TableCell>
                           <TableCell>
                             <DropdownMenu>
