@@ -490,12 +490,12 @@ export default function Dashboard() {
                               </TableCell>
                               <TableCell className="hidden sm:table-cell">
                                 <Badge className="text-xs" variant="secondary">
-                                  {transaction.issue_date}
+                                  {(transaction.issue_date).split("T")[0].replace("-", ":")}
                                 </Badge>
                               </TableCell>
                               <TableCell className="hidden md:table-cell">
                                 <Badge className="text-xs" variant="secondary">
-                                  {transaction.return_date? transaction.return_date:'Not returned'}
+                                  {transaction.return_date? (transaction.return_date).split("T")[0].replace("-", ":"):'Not returned'}
                                 </Badge>
                               </TableCell>
                               <TableCell className="text-right">{transaction.fee}</TableCell>
