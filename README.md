@@ -184,12 +184,38 @@ You can add screenshots of the frontend UI here to showcase the application. To 
 2. Save images in the `frontend/public/images` folder.
 3. Add markdown image links here, for example:
 
-```markdown
-![Dashboard](frontend/public/images/dashboard.png)
-![Issue Book](frontend/public/images/issue_book.png)
-```
+![Library Homepage](frontend/public/images/homepage.png)
+*Library Management System Homepage*
+
+![Books Page](frontend/public/images/books.png)
+*Books management page showing list of books*
+
+![Add Book](frontend/public/images/addbook.png)
+*Form to add a new book*
+
+![Members Page](frontend/public/images/members.png)
+*Members management page*
+
+![Add Member](frontend/public/images/addmember.png)
+*Form to add a new member*
+
+![Issue Book](frontend/public/images/issuebook.png)
+*Issue book to a member*
+
+![Issued Books](frontend/public/images/issuedbooks.png)
+*List of currently issued books*
+
+![Payment](frontend/public/images/payment.png)
+*Make payment to reduce member debt*
+
+![Return Book](frontend/public/images/return.png)
+*Return a borrowed book*
+
+![Library Image](frontend/public/images/libraryImage.png)
+*Library logo or image*
 
 ---
+
 
 ## Contributing
 

@@ -96,3 +96,5 @@ Contributions are welcome! Please fork the repository and create a pull request 
 ---
 
 For more information on Next.js, visit the [Next.js Documentation](https://nextjs.org/docs).
+yarn test
+git clone <repository-url>
