@@ -107,10 +107,10 @@ export default function ReturnBook({onAction, selectedBook}) {
       <CardContent>
         <Card className="mb-3 mx-auto">
             <CardContent className="text-center">
-                <p>Book Title: {selectedBook.title}</p>
+                <p>Book Title: {selectedBook?.title}</p>
                 <br />
-                <p>Member name: {selectedBook.name}</p>
-                <p>Fee: {selectedBook.fee}</p>
+                <p>Member name: {selectedBook?.name}</p>
+                <p>Fee: {selectedBook?.fee}</p>
             </CardContent>
         </Card>
         <form>
