@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 db = SQLAlchemy()
 migrate = Migrate()
 
-
 def create_app():
     load_dotenv()
     app = Flask(__name__)
