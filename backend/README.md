@@ -1,23 +1,121 @@
-# Flask Template
+# Library Management System - Backend
 
-This sample repo contains the recommended structure for a Python Flask project. In this sample, we use `flask` to build a web application and the `pytest` to run tests.
+## Project Overview
+This is the backend service for the Library Management System. It is built using Flask and provides RESTful API endpoints to manage books, members, transactions, and payments. The backend connects to a MySQL database and supports features such as book issuing, returning, member debt management, and more.
 
- For a more in-depth tutorial, see our [Flask tutorial](https://code.visualstudio.com/docs/python/tutorial-flask).
+## Features
+- Manage books: add, update, delete, and list books.
+- Manage members: add, update, delete, and list members.
+- Issue and return books with transaction tracking.
+- Manage member debts and payments.
+- RESTful API design with JSON responses.
+- Database migrations support with Flask-Migrate.
+- Cross-Origin Resource Sharing (CORS) enabled for frontend integration.
 
- The code in this repo aims to follow Python style guidelines as outlined in [PEP 8](https://peps.python.org/pep-0008/).
+## Technologies Used
+- Python 3.x
+- Flask
+- Flask-SQLAlchemy
+- Flask-Migrate
+- Flask-CORS
+- MySQL (Amazon RDS)
+- dotenv for environment variable management
 
-## Running the Sample
+## Installation and Setup
 
-To successfully run this example, we recommend the following VS Code extensions:
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd backend
+   ```
 
-- [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-- [Python Debugger](https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy)
-- [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) 
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate   # On Windows
+   source venv/bin/activate  # On macOS/Linux
+   ```
 
-- Open the template folder in VS Code (**File** > **Open Folder...**)
-- Create a Python virtual environment using the **Python: Create Environment** command found in the Command Palette (**View > Command Palette**). Ensure you install dependencies found in the `pyproject.toml` file
-- Ensure your newly created environment is selected using the **Python: Select Interpreter** command found in the Command Palette
-- Run the app using the Run and Debug view or by pressing `F5`
-- To test your app, ensure you have the dependencies from `dev-requirements.txt` installed in your environment
-- Navigate to the Test Panel to configure your Python test or by triggering the **Python: Configure Tests** command from the Command Palette
-- Run tests in the Test Panel or by clicking the Play Button next to the individual tests in the `test_app.py` file
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Set up environment variables:
+   Create a `.env` file in the `backend/` directory with the following variables:
+   ```
+   SECRET_KEY=your_secret_key
+   FLASK_DEBUG=1
+   FRONTEND_URL=https://library-management-lqdj.vercel.app
+   SQLALCHEMY_DATABASE_URI=mysql+pymysql://administrator:administratorpassword_@database-2.cpu6c04gkauk.eu-north-1.rds.amazonaws.com:3306/librarymanager
+   ```
+
+## Configuration
+The application configuration is managed in `app/config.py`. Key settings include:
+- `SECRET_KEY`: Flask secret key for sessions and security.
+- `SQLALCHEMY_DATABASE_URI`: Database connection string.
+- SQLAlchemy connection pool settings for performance.
+- Debug mode controlled by `FLASK_DEBUG`.
+
+## Running the Application
+To start the Flask backend server, run:
+```bash
+python run.py
+```
+The server will start on port 5000 by default.
+
+## API Endpoints
+
+### Books
+- `GET /books` - List all books.
+- `POST /books` - Add a new book.
+- `GET /books/<book_id>` - Get details of a specific book.
+- `PUT /books/<book_id>` - Update a book.
+- `DELETE /books/delete/<book_id>` - Delete a book.
+
+### Members
+- `GET /members` - List all members.
+- `POST /members` - Add a new member.
+- `GET /members/<member_id>` - Get details of a specific member.
+- `PUT /members/<member_id>` - Update a member.
+- `PUT /members/debtUpdate/<member_id>` - Update member debt.
+- `DELETE /members/delete/<member_id>` - Delete a member.
+
+### Transactions
+- `GET /transactions` - List all transactions.
+- `POST /transactions` - Issue a book to a member.
+- `POST /return` - Return a book.
+- `GET /issued_books` - List all currently issued books.
+
+### Payments
+- `POST /make_payment` - Make a payment to reduce member debt.
+
+## Database Migrations
+This project uses Flask-Migrate for database migrations.
+
+To initialize migrations (if not done):
+```bash
+flask db init
+```
+
+To create a migration after model changes:
+```bash
+flask db migrate -m "Migration message"
+```
+
+To apply migrations:
+```bash
+flask db upgrade
+```
+
+## Testing
+Tests are located in the `tests/` directory. To run tests, use:
+```bash
+pytest
+```
+
+## License
+Specify your license here (e.g., MIT License).
+
+## Contact
+For support or inquiries, please contact [Your Name] at [your.email@example.com].

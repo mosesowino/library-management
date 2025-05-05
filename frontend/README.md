@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Library Management System - Frontend
 
-## Getting Started
+This is the frontend application for the Library Management System, built with [Next.js](https://nextjs.org) and TypeScript. It provides the user interface for managing books, members, and transactions in the library.
 
-First, run the development server:
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (version 14 or later recommended)
+- npm (comes with Node.js) or yarn
+
+## Installation
+
+1. Clone the repository (if you haven't already):
+
+```bash
+git clone <repository-url>
+```
+
+2. Navigate to the frontend directory:
+
+```bash
+cd frontend
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+## Development
+
+To start the development server with hot reloading:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the app. The page auto-updates as you edit the source files.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build and Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To build the application for production:
 
-## Learn More
+```bash
+npm run build
+# or
+yarn build
+```
 
-To learn more about Next.js, take a look at the following resources:
+To start the production server after building:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm start
+# or
+yarn start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Testing
 
-## Deploy on Vercel
+This project uses [Jest](https://jestjs.io/) for testing.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To run tests:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm test
+# or
+yarn test
+```
+
+## Technologies Used
+
+- [Next.js](https://nextjs.org) - React framework for server-side rendering and static site generation
+- [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript superset
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Jest](https://jestjs.io/) - JavaScript testing framework
+
+## Folder Structure Overview
+
+- `src/app/` - Main application pages and routes
+- `src/components/` - Reusable UI components
+- `public/` - Static assets like images and icons
+- `.next/` - Next.js build output (auto-generated)
+- `node_modules/` - Project dependencies
+- `jest.config.js` and `jest.setup.js` - Jest configuration files
+- `next.config.mjs` - Next.js configuration
+- `tailwind.config.ts` and `postcss.config.mjs` - Tailwind CSS configuration
+
+## How to Contribute
+
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
+
+---
+
+For more information on Next.js, visit the [Next.js Documentation](https://nextjs.org/docs).
