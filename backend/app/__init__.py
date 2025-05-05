@@ -12,11 +12,10 @@ migrate = Migrate()
 
 
 def create_app():
-    # frontend_url = os.getenv("FRONTEND_URL_DEV")
-    app = Flask(__name__)
     load_dotenv()
-    # print(f"Frontend URL: {frontend_url}")
-    CORS(app, origins=["http://localhost:3000", "http://192.168.56.1:3000"], supports_credentials=True)
+    app = Flask(__name__)
+    frontend_url = os.getenv("FRONTEND_URL")
+    CORS(app, origins=[frontend_url], supports_credentials=True)
 
     app.config.from_object(Config)
 
