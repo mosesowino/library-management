@@ -40,7 +40,7 @@ export default function UpdateMember({ onAction, member }) {
 
       const sendUpdate = async () => {
         try {
-          const response = await fetch(`${backendUrl}/members/${member.id}`, {
+          const response = await fetch(`${backendUrl}/members/${member?.id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -73,9 +73,9 @@ export default function UpdateMember({ onAction, member }) {
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Card className="mb-2 p-2 text-sm">
-                  <p><strong>Member ID:</strong> {member.id}</p>
-                  <p><strong>Name:</strong> {member.name}</p>
-                  <p><strong>Phone:</strong> {member.phone}</p>
+                  <p><strong>Member ID:</strong> {member?.id}</p>
+                  <p><strong>Name:</strong> {member?.name}</p>
+                  <p><strong>Phone:</strong> {member?.phone}</p>
                 </Card>
                 <Input
                   placeholder="New Name"
