@@ -68,8 +68,8 @@ export default function UpdateBook({ onAction, book }) {
       </CardHeader>
       <CardContent>
         <Card className="py-4 mb-3 text-center">
-          <p>Title: {book.title}</p>
-          <p>Author: {book.author}</p>
+          <p>Title: {book?.title}</p>
+          <p>Author: {book?.author}</p>
         </Card>
         {showForm ? (
           <form onSubmit={(e) => e.preventDefault()}>
