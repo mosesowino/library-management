@@ -162,17 +162,8 @@ npm test
 
 ## Deployment
 
-The frontend build output is copied to the backend static folder during deployment using the `npm run deploy` script in the frontend. The backend can then serve the static frontend files.
-
-For production, build the frontend:
-
-```bash
-cd frontend
-npm run build
-npm run deploy
-```
-
-Then start the backend server to serve the app.
+Both the frontend and backend are deployed independently during production, the backend on render.com and frontend on vercel,
+The database is hosted on aws(rds).
 
 ---
 
