@@ -4,7 +4,7 @@ This project is a full-stack Library Management System consisting of a **fronten
 
 ---
 
-## Table of Contents
+## Table of Contents 
 
 - [Project Overview](#project-overview)  
 - [Folder Structure](#folder-structure)  
